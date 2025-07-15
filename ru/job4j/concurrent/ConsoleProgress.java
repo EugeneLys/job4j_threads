@@ -10,13 +10,12 @@ public class ConsoleProgress implements Runnable{
         int i = 0;
         var process = new char[] {'-', '\\', '|', '/'};
         while (!Thread.currentThread().isInterrupted()) {
-            System.out.print("\rload: " + process[i++]);
-            i = i == 3 ? 0 : i;
             try {
+                System.out.print("\rload: " + process[i++]);
+                i = i == 3 ? 0 : i;
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                break;
+                Thread.currentThread().interrupt();
             }
         }
     }
