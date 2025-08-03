@@ -3,6 +3,8 @@ package ru.job4j.thread;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -43,7 +45,12 @@ public class Wget implements Runnable {
     }
 
     private long getPause(int bufferSize, long time, long speed) {
-        return (bufferSize * 1000000L) / time <= speed ? -1 : (bufferSize * 1000000L) / time / speed;
+        BigDecimal b = BigDecimal.valueOf(bufferSize);
+        BigDecimal t = BigDecimal.valueOf(time);
+        BigDecimal s = BigDecimal.valueOf(speed);
+        BigDecimal x = BigDecimal.valueOf(1000000L);
+        return b.multiply(x).divide(t, RoundingMode.DOWN).compareTo(s) <= 0 ?
+                -1 : b.multiply(x).divide(t, RoundingMode.DOWN).divide(s, RoundingMode.DOWN).longValue();
     }
 
     public static void main(String[] args) throws InterruptedException {
