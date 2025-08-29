@@ -15,6 +15,8 @@ public class CallableDemo {
         }
         for(Future<String> fs : results) {
             try {
+                //fs.wait(1000);
+                fs.isDone();
                 System.out.println(fs.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
