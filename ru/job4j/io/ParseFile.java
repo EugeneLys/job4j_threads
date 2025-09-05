@@ -12,14 +12,4 @@ public class ParseFile {
     public synchronized File getFile() {
         return file;
     }
-
-    public void saveContent(String content) throws IOException {
-        try (BufferedOutputStream o = new BufferedOutputStream(new FileOutputStream(file))) {
-            for (int i = 0; i < content.length(); i++) {
-                o.write(content.charAt(i));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

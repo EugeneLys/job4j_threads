@@ -11,7 +11,7 @@ public class FileContentReader implements IReader {
     }
 
     @Override
-    public String getContent(Predicate<Integer> filter) throws IOException {
+    public synchronized String getContent(Predicate<Integer> filter) throws IOException {
         String output = "";
         try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(file))) {
             int data;
