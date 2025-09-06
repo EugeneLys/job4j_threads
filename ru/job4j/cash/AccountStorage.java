@@ -12,7 +12,7 @@ public class AccountStorage {
     private final HashMap<Integer, Account> accounts = new HashMap<>();
 
     public synchronized boolean add(Account account) {
-        return this.accounts.put(account.id(), account) != null;
+        return this.accounts.putIfAbsent(account.id(), account) == null;
     }
 
     public synchronized boolean update(Account account) {
@@ -24,11 +24,13 @@ public class AccountStorage {
     }
 
     public synchronized Optional<Account> getById(int id) {
-        return this.accounts.get(id) != null ? Optional.of(accounts.get(id)) : Optional.empty();
+        var account = this.accounts.get(id);
+        return Optional.ofNullable(account);
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
-        if (amount <= 0 || getById(fromId).isEmpty() || getById(toId).isEmpty()) {
+        if (amount <= 0 || getById(fromId).isEmpty() || getById(toId).isEmpty()
+                || getById(fromId).get().amount() < amount) {
             return false;
         }
         Account from = getById(fromId).get();
