@@ -1,4 +1,4 @@
-package cash;
+package ru.job4j.cash;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;

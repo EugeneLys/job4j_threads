@@ -1,4 +1,4 @@
-package job4j.concurrent;
+package ru.job4j.concurrent;
 
 import java.util.Arrays;
 

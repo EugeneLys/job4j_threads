@@ -1,4 +1,4 @@
-package threads.threadlocal;
+package ru.job4j.threads.threadlocal;
 
 public class ThreadLocalDemo {
     public static ThreadLocal<String> threadLocal = new ThreadLocal<>();

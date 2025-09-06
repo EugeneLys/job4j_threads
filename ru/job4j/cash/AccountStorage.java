@@ -1,4 +1,4 @@
-package cash;
+package ru.job4j.cash;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
