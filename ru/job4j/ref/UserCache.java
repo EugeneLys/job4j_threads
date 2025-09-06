@@ -1,4 +1,4 @@
-package ru.job4j.ref;
+package ref;
 
 import java.util.ArrayList;
 import java.util.Collection;
