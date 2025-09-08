@@ -1,7 +1,5 @@
 package ru.job4j.concurrent;
 
-import java.util.Arrays;
-
 public class ConsoleProgress implements Runnable{
 
 
