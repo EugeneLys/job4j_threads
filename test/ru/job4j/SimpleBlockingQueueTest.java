@@ -12,8 +12,14 @@ class SimpleBlockingQueueTest {
     @Test
     void whenProducerBegins() throws InterruptedException {
             AtomicInteger result = new AtomicInteger();
-            SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(new LinkedList());
-            Thread producer = new Thread(() -> queue.offer(1));
+            SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(new LinkedList(), 1);
+            Thread producer = new Thread(() -> {
+                try {
+                    queue.offer(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
             Thread consumer = new Thread(() -> {
                 try {
                     result.set(queue.poll());
@@ -32,8 +38,14 @@ class SimpleBlockingQueueTest {
     @Test
     void whenConsumerBegins() throws InterruptedException {
         AtomicInteger result = new AtomicInteger();
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(new LinkedList());
-        Thread producer = new Thread(() -> queue.offer(1));
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(new LinkedList(), 1);
+        Thread producer = new Thread(() -> {
+            try {
+                queue.offer(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
         Thread consumer = new Thread(() -> {
             try {
                 result.set(queue.poll());
