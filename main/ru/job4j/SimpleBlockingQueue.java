@@ -11,7 +11,6 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
     private final int limit;
-    private int count;
 
     public SimpleBlockingQueue(Queue<T> queue, int limit) {
         if (limit < 1) {
@@ -22,11 +21,10 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized void offer(T value) throws InterruptedException {
-        while (count == limit) {
+        while (queue.size() == limit) {
             wait();
         }
         queue.offer(value);
-        count++;
         notifyAll();
     }
 
@@ -35,7 +33,6 @@ public class SimpleBlockingQueue<T> {
             wait();
         }
         T result = queue.poll();
-        count--;
         notifyAll();
         return result;
     }
