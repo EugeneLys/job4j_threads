@@ -16,6 +16,16 @@ class CacheTest {
     }
 
     @Test
+    public void whenMultipleAddThenFalse() throws OptimisticException {
+        var base = new Base(1,  "Base", 1);
+        var cache = new Cache();
+        cache.add(base);
+        assertThat(cache.add(base))
+                .isFalse();
+
+    }
+
+    @Test
     public void whenAddUpdateFind() throws OptimisticException {
         var base = new Base(1, "Base", 1);
         var cache = new Cache();
@@ -44,5 +54,22 @@ class CacheTest {
         cache.update(base);
         assertThatThrownBy(() -> cache.update(base))
                 .isInstanceOf(OptimisticException.class);
+    }
+
+    @Test
+    public void whenFindByIdNothing() {
+        var cache = new Cache();
+        assertThat(cache.findById(1))
+                .isEmpty();
+    }
+
+    @Test
+    public void whenDeleteFind() throws OptimisticException {
+        var cache = new Cache();
+        var base = new Base(1, "name", 1);
+        cache.add(base);
+        cache.delete(1);
+        assertThat(cache.findById(1))
+                .isEmpty();
     }
 }
