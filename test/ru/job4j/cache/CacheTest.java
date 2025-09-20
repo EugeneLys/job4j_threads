@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CacheTest {
     @Test
-    public void whenAddFind() throws OptimisticException {
+    public void whenAddFind() {
         var base = new Base(1,  "Base", 1);
         var cache = new Cache();
         cache.add(base);
@@ -16,7 +16,7 @@ class CacheTest {
     }
 
     @Test
-    public void whenMultipleAddThenFalse() throws OptimisticException {
+    public void whenMultipleAddThenFalse() {
         var base = new Base(1,  "Base", 1);
         var cache = new Cache();
         cache.add(base);
@@ -37,7 +37,7 @@ class CacheTest {
     }
 
     @Test
-    public void whenAddDeleteFind() throws OptimisticException {
+    public void whenAddDeleteFind() {
         var base = new Base(1,   "Base", 1);
         var cache = new Cache();
         cache.add(base);
@@ -64,7 +64,7 @@ class CacheTest {
     }
 
     @Test
-    public void whenDeleteFind() throws OptimisticException {
+    public void whenDeleteFind() {
         var cache = new Cache();
         var base = new Base(1, "name", 1);
         cache.add(base);
