@@ -14,9 +14,7 @@ public class ThreadPool {
         while (size > 0) {
             threads.add(new Thread(() -> {
                 try {
-                    while(true) {
-                        tasks.poll().run();
-                    }
+                    tasks.poll().run();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

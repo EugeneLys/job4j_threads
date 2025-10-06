@@ -7,7 +7,7 @@ class ThreadPoolTest {
 
     @Test
     void whenProfilingBySystemOutPrintLn() throws InterruptedException {
-        Runnable task = () -> System.out.println("Hello " + Math.random());
+        Runnable task = () -> System.out.println("Hello " + Math.random() + " " + Thread.currentThread().getName());
         ThreadPool threadPool = new ThreadPool();
         for (int i = 0; i < 10; i++) {
             threadPool.work(task);
