@@ -12,6 +12,11 @@ public class EmailNotification {
     public void emailTo(User user) {
         String subject = String.format("Notification %s to email %s", user.username, user.email);
         String body = String.format("Add a new event to %s", user.username);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         pool.submit(() -> send(subject, body, user.email));
     }
 
