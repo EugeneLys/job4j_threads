@@ -1,23 +1,19 @@
 package ru.job4j.pool;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class EmailNotification {
 
-    ExecutorService pool = Executors.newFixedThreadPool(
+    ScheduledExecutorService pool = Executors.newScheduledThreadPool(
             Runtime.getRuntime().availableProcessors()
     );
 
     public void emailTo(User user) {
         String subject = String.format("Notification %s to email %s", user.username, user.email);
         String body = String.format("Add a new event to %s", user.username);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        pool.submit(() -> send(subject, body, user.email));
+        pool.schedule(() -> send(subject, body, user.email), 10, TimeUnit.SECONDS);
     }
 
     public void close() {
